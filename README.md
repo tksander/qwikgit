@@ -14,7 +14,7 @@ The key elements to note when trying to implement NavigationExperimental with Re
 	index: [number representing currently displayed screen],
 	routes: [
 		// Array of NavigationRoute objects, which must contain at minimum a `key` property:
-		{ key: 'MyScreen' }
+		{ key: 'MyScreen', title: 'A Title is Optional', [...other props here for your own use] }
 	]
 }
 ```
@@ -41,6 +41,8 @@ Again just as a reminder, this little sample repo is **not** meant to be a start
 At this time, NavigationExperimental is moving quite quickly and the API is still a bit of a moving target. Master branch will attempt to follow the current stable release (this is a change from previous) since things are starting to quiet down. For version-specific implementations older than the current stable release, I'm creating a branch per RN version. For example, see the [0.23 branch](https://github.com/jlyman/RN-NavigationExperimental-Redux-Example/tree/0.23) of this repo to see how to implement against the NavigationExperimental API in RN 0.23.
 
 * [/tree/master](current stable release)
+* [/tree/0.30](0.30)
+* [/tree/0.29](0.29)
 * [/tree/0.28](0.28)
 * [/tree/0.27](0.27)
 * [/tree/0.26](0.26)
