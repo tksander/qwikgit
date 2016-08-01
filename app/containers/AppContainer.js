@@ -8,7 +8,7 @@ import First from './First'
 import Second from './Second'
 import Third from './Third'
 import Modal from './Modal'
-import { navigatePush, navigatePop } from '../actions'
+import { navigatePop } from '../actions'
 
 const {
 	Transitioner: NavigationTransitioner,
