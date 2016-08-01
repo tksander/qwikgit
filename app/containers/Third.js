@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onButtonPress: () => {
+			// Note: Scene resets are broken in the current version of NavigationExperimental
 			dispatch(navigateReset([{ key: 'First', title: 'First' }], 0))
 		}
 	}
