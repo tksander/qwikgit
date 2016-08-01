@@ -8,8 +8,7 @@ const ThirdScreen = (props) => {
 		<View style={styles.container}>
 			<Text style={styles.title}>Third Screen</Text>
 
-			{ /* Note: Scene resets are broken in the current version of NavigationExperimental */ }
-			<NavButton destLabel="Home (broken)" buttonHandler={props.onButtonPress} />
+			<NavButton destLabel="Home" buttonHandler={props.onButtonPress} />
 		</View>
 	)
 }
