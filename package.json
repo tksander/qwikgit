@@ -9,12 +9,9 @@
   },
   "dependencies": {
     "react": "~15.2.1",
-    "react-native": "~0.30.0",
+    "react-native": "~0.31.0",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"
-  },
-  "devDependencies": {
-    "rnpm-plugin-upgrade": "^0.26.0"
   }
 }
