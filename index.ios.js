@@ -9,25 +9,33 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 class AwesomeProject extends Component {
   render() {
+    let pic = {
+      uri:  'https://avatars.githubusercontent.com/u/8528358?v=3' };
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          QwikGit(hub)
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <Text>Github repos: {this.props.repo}</Text>
+        <Image source={pic} style={{width: 200, height: 310}}/>
       </View>
     );
+  }
+}
+class ListNames extends Component {
+  render() {
+    return (
+      <View style={styles.instructions}>
+       <AwesomeProject repo='Tommy' />
+       <AwesomeProject repo='Bob' />
+      </View>
+    ) 
   }
 }
 
