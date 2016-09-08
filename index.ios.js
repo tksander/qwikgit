@@ -22,20 +22,21 @@ class AwesomeProject extends Component {
         <Text style={styles.welcome}>
           QwikGit(hub)
         </Text>
-        <Text>Github repos: {this.props.repo}</Text>
+        <Repo name='Tommy'> Some text here </Repo>
+        <Repo name='Bob'> Some text here </Repo>
         <Image source={pic} style={{width: 200, height: 310}}/>
       </View>
     );
   }
 }
-class ListNames extends Component {
+class Repo extends Component {
   render() {
     return (
       <View style={styles.instructions}>
-       <AwesomeProject repo='Tommy' />
-       <AwesomeProject repo='Bob' />
+       <Text> Repo author: {this.props.name} </Text>
+       <Text> Other text: {this.props.children} </Text>
       </View>
-    ) 
+    )
   }
 }
 
