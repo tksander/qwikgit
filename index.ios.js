@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 class AwesomeProject extends Component {
+  //test
   render() {
     let pic = {
       uri:  'https://avatars.githubusercontent.com/u/8528358?v=3' };
