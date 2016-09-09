@@ -40,6 +40,16 @@ class Repo extends Component {
   }
 }
 
+fetch('https://api.github.com/users/tksander/repos')
+.then(function(response) {
+  // console.log("JSON Response: " + response.blob())
+  return response.json()
+})
+.then(function(responseJSON){
+  debugger
+  console.log("JSON Response: " + responseJSON)
+})
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
