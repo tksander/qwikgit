@@ -13,11 +13,36 @@ import {
   Image
 } from 'react-native';
 
+
 class AwesomeProject extends Component {
-  //test
+  constructor(props) {
+    super(props)
+    this.state = {
+      avatarUrl: ''
+    }
+  }
+
+  componentDidMount() {
+    // Abstract to Service
+    const self = this;
+    this.serverRequest =  fetch('https://api.github.com/users/tksander')
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJson) => {
+        self.setState({
+          avatarUrl: responseJson.avatar_url
+        })
+        debugger
+      })
+  }
+  componentWillUnmount() {
+    this.serverRequest.abort();
+  }
+
   render() {
-    let pic = {
-      uri:  'https://avatars.githubusercontent.com/u/8528358?v=3' };
+    debugger
+    let pic = { uri:  this.state.avatarUrl };
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -30,6 +55,7 @@ class AwesomeProject extends Component {
     );
   }
 }
+
 class Repo extends Component {
   render() {
     return (
@@ -41,15 +67,6 @@ class Repo extends Component {
   }
 }
 
-fetch('https://api.github.com/users/tksander/repos')
-.then(function(response) {
-  // console.log("JSON Response: " + response.blob())
-  return response.json()
-})
-.then(function(responseJSON){
-  debugger
-  console.log("JSON Response: " + responseJSON)
-})
 
 const styles = StyleSheet.create({
   container: {
