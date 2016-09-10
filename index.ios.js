@@ -18,14 +18,15 @@ class AwesomeProject extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      avatarUrl: ''
+      avatarUrl: '',
+      repos: []
     }
   }
 
   componentDidMount() {
     // Abstract to Service
     const self = this;
-    this.serverRequest =  fetch('https://api.github.com/users/tksander')
+    fetch('https://api.github.com/users/tksander')
       .then((response) => {
         return response.json()
       })
@@ -33,23 +34,31 @@ class AwesomeProject extends Component {
         self.setState({
           avatarUrl: responseJson.avatar_url
         })
-        debugger
+      })
+
+    fetch('https://api.github.com/users/tksander/repos')
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJson) => {
+        self.setState({
+          repos: responseJson
+        })
       })
   }
   componentWillUnmount() {
-    this.serverRequest.abort();
+    // Cancel outstanding requests -- necessary?
   }
 
   render() {
-    debugger
     let pic = { uri:  this.state.avatarUrl };
+
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          QwikGit(hub)
-        </Text>
-        <Repo name='Tommy'> Some text here </Repo>
-        <Repo name='Bob'> Some text here </Repo>
+        <Text style={styles.welcome}> QwikGit(hub) </Text>
+        debugger
+      <Repo name={this.state.repos[0].name} link={this.state.repos.state.repos[0].html_url}></Repo>
         <Image source={pic} style={{width: 200, height: 310}}/>
       </View>
     );
@@ -60,8 +69,7 @@ class Repo extends Component {
   render() {
     return (
       <View style={styles.instructions}>
-       <Text> Repo author: {this.props.name} </Text>
-       <Text> Other text: {this.props.children} </Text>
+       <Text> Repo name: {this.props.name} link: {this.props.link}</Text>
       </View>
     )
   }
