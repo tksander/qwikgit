@@ -51,13 +51,18 @@ class AwesomeProject extends Component {
   }
 
   render() {
+    const self = this
     let pic = { uri:  this.state.avatarUrl };
+    let row = []
+
     if (this.state.repos && this.state.avatarUrl) {
-      debugger
+      this.state.repos.forEach((repo) => {
+       row.push(<Repo name={repo.name} link={repo.html_url}></Repo>)
+      })
       return (
         <View style={styles.container}>
           <Text style={styles.welcome}> QwikGit(hub) </Text>
-          <Repo name={this.state.repos[0].name} link={this.state.repos[0].html_url}></Repo>
+          {row}
           <Image source={pic} style={{width: 200, height: 310}}/>
         </View>
       )
