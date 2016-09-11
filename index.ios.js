@@ -19,7 +19,7 @@ class AwesomeProject extends Component {
     super(props)
     this.state = {
       avatarUrl: '',
-      repos: []
+      repos: null
     }
   }
 
@@ -52,16 +52,21 @@ class AwesomeProject extends Component {
 
   render() {
     let pic = { uri:  this.state.avatarUrl };
-
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}> QwikGit(hub) </Text>
-        debugger
-      <Repo name={this.state.repos[0].name} link={this.state.repos.state.repos[0].html_url}></Repo>
-        <Image source={pic} style={{width: 200, height: 310}}/>
-      </View>
-    );
+    if (this.state.repos && this.state.avatarUrl) {
+      debugger
+      return (
+        <View style={styles.container}>
+          <Text style={styles.welcome}> QwikGit(hub) </Text>
+          <Repo name={this.state.repos[0].name} link={this.state.repos[0].html_url}></Repo>
+          <Image source={pic} style={{width: 200, height: 310}}/>
+        </View>
+      )
+    }
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      )
   }
 }
 
