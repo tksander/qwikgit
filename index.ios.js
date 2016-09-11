@@ -46,9 +46,6 @@ class AwesomeProject extends Component {
         })
       })
   }
-  componentWillUnmount() {
-    // Cancel outstanding requests -- necessary?
-  }
 
   render() {
     const self = this
@@ -57,12 +54,14 @@ class AwesomeProject extends Component {
 
     if (this.state.repos && this.state.avatarUrl) {
       this.state.repos.forEach((repo) => {
-       row.push(<Repo name={repo.name} link={repo.html_url}></Repo>)
+       row.push(<Repo name={repo.name} link={repo.html_url} key={repo.id}></Repo>)
       })
       return (
         <View style={styles.container}>
           <Text style={styles.welcome}> QwikGit(hub) </Text>
-          {row}
+          <table>
+            {row.slice(0,3)}
+          </table>
           <Image source={pic} style={{width: 200, height: 310}}/>
         </View>
       )
@@ -79,7 +78,10 @@ class Repo extends Component {
   render() {
     return (
       <View style={styles.instructions}>
-       <Text> Repo name: {this.props.name} link: {this.props.link}</Text>
+        <tr>
+           <td><Text> Repo name: {this.props.name}</Text></td>
+           <td><Text> link: {this.props.link}</Text></td>
+        </tr>
       </View>
     )
   }
