@@ -18,8 +18,6 @@ import {
 class AwesomeProject extends Component {
   constructor(props) {
     super(props)
-    // this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-    // this.dataSource = ds.cloneWithRows(this._genRows({}))
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
       dataSource: ds.cloneWithRows({rowHasChanged: this._rowHasChanged}),
@@ -64,7 +62,10 @@ class AwesomeProject extends Component {
     if (this.state.dataSource && this.state.avatarUrl) {
       return (
         <View style={styles.container}>
-          <Text style={styles.welcome}> QwikGit(hub) </Text>
+          <Text>Hello</Text>
+          <View>
+            <Header></Header>
+          </View>
           <Image source={pic} style={{width: 80, height: 80}}/>
           <ListView
             dataSource={this.state.dataSource}
@@ -81,14 +82,15 @@ class AwesomeProject extends Component {
   }
 }
 
-// class Header extends Component {
-  // render() {
-    // return (
-      // <View style={styles.instructions}>
-      // </View>
-    // )
-  // }
-// }
+class Header extends Component {
+  render() {
+    return (
+      <View>
+      <Text>QwikGit</Text>
+      </View>
+    )
+  }
+}
 
 class Repo extends Component {
   render() {
@@ -107,11 +109,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   },
   instructions: {
     textAlign: 'center',
