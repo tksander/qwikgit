@@ -14,6 +14,8 @@ import {
   ListView
 } from 'react-native';
 
+var SearchBar = require('./SearchBar.ios.js')
+
 
 class AwesomeProject extends Component {
   constructor(props) {
@@ -57,16 +59,14 @@ class AwesomeProject extends Component {
 
   render() {
     const self = this
-    let pic = { uri:  this.state.avatarUrl };
 
     if (this.state.dataSource && this.state.avatarUrl) {
       return (
-        <View style={styles.container}>
-          <Text>Hello</Text>
+        <View>
+          <Text>QwikGit</Text>
           <View>
-            <Header></Header>
+            <Header pic={{ uri:  this.state.avatarUrl }}></Header>
           </View>
-          <Image source={pic} style={{width: 80, height: 80}}/>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow}
@@ -75,7 +75,7 @@ class AwesomeProject extends Component {
       )
     }
       return (
-        <View style={styles.container}>
+        <View>
           <Text>Loading...</Text>
         </View>
       )
@@ -86,7 +86,7 @@ class Header extends Component {
   render() {
     return (
       <View>
-      <Text>QwikGit</Text>
+          <Image source={this.props.pic} style={{width: 80, height: 80}}/>
       </View>
     )
   }
@@ -104,17 +104,6 @@ class Repo extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
