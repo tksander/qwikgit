@@ -63,6 +63,12 @@ class AwesomeProject extends Component {
     if (this.state.dataSource && this.state.avatarUrl) {
       return (
         <View>
+          <SearchBar
+            onSearchChange={this.onSearchChange}
+            isLoading={false}
+            onFocus={() =>
+              this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
+          />
           <Text>QwikGit</Text>
           <View>
             <Header pic={{ uri:  this.state.avatarUrl }}></Header>
