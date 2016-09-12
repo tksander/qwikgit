@@ -59,11 +59,13 @@ class AwesomeProject extends Component {
 
   render() {
     const self = this
-    debugger
+    let pic = { uri:  this.state.avatarUrl };
+
     if (this.state.dataSource && this.state.avatarUrl) {
       return (
         <View style={styles.container}>
-            <Header pic={{ uri:  this.state.avatarUrl }}></Header>
+          <Text style={styles.welcome}> QwikGit(hub) </Text>
+          <Image source={pic} style={{width: 80, height: 80}}/>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow}
@@ -71,26 +73,22 @@ class AwesomeProject extends Component {
         </View>
       )
     }
-
-    return (
-      <View style={styles.container}>
-        <Text>Loading...</Text>
-      </View>
-    )
+      return (
+        <View style={styles.container}>
+          <Text>Loading...</Text>
+        </View>
+      )
   }
 }
 
-class Header extends Component {
- render() {
-   debugger
-  return (
-    <View>
-      <Text style={styles.welcome}> QwikGit(hub) </Text>
-      <Image source={this.props.pic} style={{width: 80, height: 80}}/>
-    </View>
-  )
- }
-}
+// class Header extends Component {
+  // render() {
+    // return (
+      // <View style={styles.instructions}>
+      // </View>
+    // )
+  // }
+// }
 
 class Repo extends Component {
   render() {
