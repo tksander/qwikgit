@@ -28,13 +28,6 @@ class AwesomeProject extends Component {
     }
   }
 
-  _onDataArrived(newData) {
-    debugger
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newData)
-    })
-  }
-
   componentDidMount() {
     // Abstract to Service
     const self = this;
@@ -60,30 +53,43 @@ class AwesomeProject extends Component {
   }
 
 
+  _renderRow(rowData) {
+   return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
+  }
+
   render() {
     const self = this
-    let pic = { uri:  this.state.avatarUrl };
-
-    // Refactor to map
+    debugger
     if (this.state.dataSource && this.state.avatarUrl) {
-       // row.push(<Repo name={repo.name} link={repo.html_url}></Repo>)
       return (
         <View style={styles.container}>
-          <Text style={styles.welcome}> QwikGit(hub) </Text>
+            <Header pic={{ uri:  this.state.avatarUrl }}></Header>
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={(rowData => <Text>{rowData.name}</Text>)}
+            renderRow={this._renderRow}
             />
-          <Image source={pic} style={{width: 200, height: 310}}/>
         </View>
       )
     }
-      return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
-      )
+
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    )
   }
+}
+
+class Header extends Component {
+ render() {
+   debugger
+  return (
+    <View>
+      <Text style={styles.welcome}> QwikGit(hub) </Text>
+      <Image source={this.props.pic} style={{width: 80, height: 80}}/>
+    </View>
+  )
+ }
 }
 
 class Repo extends Component {
