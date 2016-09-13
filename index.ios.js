@@ -11,10 +11,12 @@ import {
   Text,
   View,
   Image,
-  ListView
+  ListView,
+  ActivityIndicator,
+  TextInput,
 } from 'react-native';
 
-var SearchBar = require('./SearchBar.ios.js')
+// var SearchBar = require('./SearchBar.ios.js')
 
 
 class AwesomeProject extends Component {
@@ -25,6 +27,7 @@ class AwesomeProject extends Component {
       dataSource: ds.cloneWithRows({rowHasChanged: this._rowHasChanged}),
       avatarUrl: '',
       repos: null,
+      text: '',
     }
   }
 
@@ -57,19 +60,17 @@ class AwesomeProject extends Component {
    return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
   }
 
+  onUpdate(text) {
+    console.log('Text in parent: ' + text)
+  }
+
   render() {
-    const self = this
 
     if (this.state.dataSource && this.state.avatarUrl) {
       return (
         <View>
-          <SearchBar
-            onSearchChange={this.onSearchChange}
-            isLoading={false}
-            onFocus={() =>
-              this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
-          />
           <Text>QwikGit</Text>
+          <SearchBar onUpdate={this.onUpdate}/>
           <View>
             <Header pic={{ uri:  this.state.avatarUrl }}></Header>
           </View>
@@ -108,6 +109,23 @@ class Repo extends Component {
   }
 }
 
+class SearchBar extends Component {
+  render() {
+    return (
+      <View>
+        <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={this.update.bind(this)}
+            placeholder="Search a user..."
+        />
+      </View>
+    );
+  }
+  update(text) {
+    console.log('Text in child: ' + text)
+    this.props.onUpdate(text)
+  }
+}
 
 const styles = StyleSheet.create({
 });
