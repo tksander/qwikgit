@@ -110,16 +110,29 @@ class Repo extends Component {
 }
 
 class SearchBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      text: ''
+    }
+  }
   render() {
     return (
       <View>
         <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={this.update.bind(this)}
+            onKeyPress={this._handleKeyPress.bind(this)}
+            onChangeText={(moreText) => this.setState({text: moreText})}
             placeholder="Search a user..."
         />
       </View>
     );
+  }
+
+  _handleKeyPress(event) {
+    if (event.nativeEvent.key === 'Enter') {
+      this.update(this.state.text)
+    }
   }
   update(text) {
     console.log('Text in child: ' + text)
