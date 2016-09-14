@@ -60,8 +60,22 @@ class AwesomeProject extends Component {
    return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
   }
 
+  _searchGitHub(user) {
+    const url = 'https://api.github.com/search/users?q=' + user
+    fetch(url)
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJson) => {
+        debugger
+        self.setState({
+          dataSource: self.state.dataSource.cloneWithRows(responseJson)
+        })
+      })
+  }
+
   onUpdate(text) {
-    console.log('Text in parent: ' + text)
+    this._searchGitHub(text)
   }
 
   render() {
@@ -70,7 +84,7 @@ class AwesomeProject extends Component {
       return (
         <View>
           <Text>QwikGit</Text>
-          <SearchBar onUpdate={this.onUpdate}/>
+          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
           <View>
             <Header pic={{ uri:  this.state.avatarUrl }}></Header>
           </View>
@@ -134,6 +148,7 @@ class SearchBar extends Component {
       this.update(this.state.text)
     }
   }
+
   update(text) {
     console.log('Text in child: ' + text)
     this.props.onUpdate(text)
