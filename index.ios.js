@@ -24,7 +24,7 @@ class AwesomeProject extends Component {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      dataSource: ds.cloneWithRows({rowHasChanged: this._rowHasChanged}),
+      dataSource: ds.cloneWithRows([]),
       avatarUrl: '',
       repos: null,
       text: '',
@@ -33,41 +33,44 @@ class AwesomeProject extends Component {
 
   componentDidMount() {
     // Abstract to Service
-    const self = this;
-    fetch('https://api.github.com/users/tksander')
-      .then((response) => {
-        return response.json()
-      })
-      .then((responseJson) => {
-        self.setState({
-          avatarUrl: responseJson.avatar_url
-        })
-      })
+    // const self = this;
+    // fetch('https://api.github.com/users/tksander')
+      // .then((response) => {
+        // return response.json()
+      // })
+      // .then((responseJson) => {
+        // self.setState({
+          // avatarUrl: responseJson.avatar_url
+        // })
+      // })
 
-    fetch('https://api.github.com/users/tksander/repos')
-      .then((response) => {
-        return response.json()
-      })
-      .then((responseJson) => {
-        self.setState({
-          dataSource: self.state.dataSource.cloneWithRows(responseJson)
-        })
-      })
+    // fetch('https://api.github.com/users/tksander/repos')
+      // .then((response) => {
+        // return response.json()
+      // })
+      // .then((responseJson) => {
+        // self.setState({
+          // dataSource: self.state.dataSource.cloneWithRows(responseJson)
+        // })
+      // })
   }
 
 
+   // return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
+
   _renderRow(rowData) {
-   return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
+    console.log('rowdata: ' + rowData.login)
+   return (<User login={rowData.login}/>)
   }
 
   _searchGitHub(user) {
+    const self = this;
     const url = 'https://api.github.com/search/users?q=' + user
     fetch(url)
       .then((response) => {
         return response.json()
       })
       .then((responseJson) => {
-        debugger
         self.setState({
           dataSource: self.state.dataSource.cloneWithRows(responseJson)
         })
@@ -79,14 +82,11 @@ class AwesomeProject extends Component {
   }
 
   render() {
-
-    if (this.state.dataSource && this.state.avatarUrl) {
+    if (this.state.dataSource.getRowCount() > 0) {
       return (
         <View>
           <Text>QwikGit</Text>
-          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
           <View>
-            <Header pic={{ uri:  this.state.avatarUrl }}></Header>
           </View>
           <ListView
             dataSource={this.state.dataSource}
@@ -97,17 +97,29 @@ class AwesomeProject extends Component {
     }
       return (
         <View>
-          <Text>Loading...</Text>
+          <Text>Search for a Github User</Text>
+          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
         </View>
       )
   }
 }
 
+            // <Header pic={{ uri:  this.state.avatarUrl }}></Header>
 class Header extends Component {
   render() {
     return (
       <View>
           <Image source={this.props.pic} style={{width: 80, height: 80}}/>
+      </View>
+    )
+  }
+}
+
+class User extends Component {
+  render() {
+    return (
+      <View>
+       <Text>User: {this.props.login}</Text>
       </View>
     )
   }
