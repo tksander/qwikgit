@@ -59,7 +59,6 @@ class AwesomeProject extends Component {
    // return (<Repo name={rowData.name} link={rowData.html_url}></Repo>)
 
   _renderRow(rowData) {
-    console.log('rowdata: ' + rowData.login)
    return (<User login={rowData.login}/>)
   }
 
@@ -72,7 +71,7 @@ class AwesomeProject extends Component {
       })
       .then((responseJson) => {
         self.setState({
-          dataSource: self.state.dataSource.cloneWithRows(responseJson)
+          dataSource: self.state.dataSource.cloneWithRows(responseJson.items)
         })
       })
   }
