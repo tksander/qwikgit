@@ -95,7 +95,12 @@ class AwesomeProject extends Component {
       )
     }
       return (
-        <View>
+        <View style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
           <Text>Search for a Github User</Text>
           <SearchBar onUpdate={this.onUpdate.bind(this)}/>
         </View>
