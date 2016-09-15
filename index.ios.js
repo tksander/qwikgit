@@ -150,7 +150,7 @@ class SearchBar extends Component {
     return (
       <View>
         <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, width: 200, borderColor: 'gray', borderWidth: 1}}
             onKeyPress={this._handleKeyPress.bind(this)}
             onChangeText={(moreText) => this.setState({text: moreText})}
             placeholder="Search a user..."
