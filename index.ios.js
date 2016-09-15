@@ -101,7 +101,7 @@ class AwesomeProject extends Component {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-          <Text>Search for a Github User</Text>
+          <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
           <SearchBar onUpdate={this.onUpdate.bind(this)}/>
         </View>
       )
@@ -148,9 +148,9 @@ class SearchBar extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={{alignSelf: 'stretch', paddingHorizontal: 40}}>
         <TextInput
-            style={{height: 40, width: 200, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onKeyPress={this._handleKeyPress.bind(this)}
             onChangeText={(moreText) => this.setState({text: moreText})}
             placeholder="Search a user..."
