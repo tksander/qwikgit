@@ -23,3 +23,8 @@ Technology
 - File watching service: [Watchman](https://facebook.github.io/watchman/)
 - Javascript [ES6] (http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 - Organization/Issue Tracking: [waffle.io](https://waffle.io)
+
+
+#### Shout Outs
+John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
+React Native excellent [docs](https://facebook.github.io/react-native/docs/)
