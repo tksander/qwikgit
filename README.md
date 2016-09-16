@@ -16,4 +16,10 @@ You will need Xcode, node.js, React Native command line tools installed:
 
 More information can be found at the [React Native Getting Started docs](https://facebook.github.io/react-native/docs/getting-started.html).
 
+Technology
+---
 
+- Framework: React Native
+- File watching service: [Watchman](https://facebook.github.io/watchman/)
+- Javascript [ES6] (http://www.ecma-international.org/publications/standards/Ecma-262.htm)
+- Organization/Issue Tracking: [waffle.io](https://waffle.io)
