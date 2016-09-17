@@ -96,11 +96,9 @@ class AwesomeProject extends Component {
   //-----------------------------------
 
   onUpdate(text) {
-    debugger
     githubService.searchUser(text).then(response => {
-        debugger
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseJson.items)
+          dataSource: this.state.dataSource.cloneWithRows(response.items)
         })
       })
   }
