@@ -13,6 +13,7 @@ import {
   Image,
   ListView,
   ActivityIndicator,
+  Navigator,
 } from 'react-native';
 
 import User from './client/components/User.js'
@@ -79,15 +80,22 @@ class AwesomeProject extends Component {
       )
     }
       return (
-        <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-          <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
-          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
-        </View>
+          <Navigator
+            initialRoute={{ title: 'Search Scene', index: 0 }}
+            renderScene={(route, navigator) => {
+               return (
+                <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                }}>
+                  <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
+                  <SearchBar onUpdate={this.onUpdate.bind(this)}/>
+                </View>
+               )
+            }}
+          />
       )
   }
 

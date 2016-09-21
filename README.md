@@ -8,7 +8,7 @@ Coming soon! (Via: https://appetize.io/)
 
 Project Setup
 -------
-You will need Xcode, node.js, React Native command line tools installed:
+You will need Xcode, node.js, and React Native command line tools installed:
 
 - Install node: `brew install node`
 - Install React Native command line interface: `npm install -g react-native-cli`
@@ -27,5 +27,5 @@ Technology
 
 
 #### Shout Outs
-John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
-React Native excellent [docs](https://facebook.github.io/react-native/docs/)
+- John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
+- React Native's excellent [docs](https://facebook.github.io/react-native/docs/)
