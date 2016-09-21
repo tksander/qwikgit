@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/tksander/qwikgit.png?label=ready&title=Ready)](https://waffle.io/tksander/qwikgit)
 # QwikGit
 ### React Native (Mobile) App, allowing users to quickly search for popular repos!
 
