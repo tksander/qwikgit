@@ -32,7 +32,7 @@ class AppContainerWithCardStack extends React.Component {
 				direction={navigationState.routes[navigationState.index].key === 'Modal' ?
 					'vertical' : 'horizontal'
 				}
-				renderOverlay={props => (
+				renderHeader={props => (
 					<NavigationHeader
 						{...props}
 						onNavigateBack={backAction}
