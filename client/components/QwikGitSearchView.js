@@ -1,4 +1,4 @@
-
+// REFACTOR: PREVIOUSLY index.ios.js
 import React, { Component } from 'react';
 import {
   AppRegistry,
