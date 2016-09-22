@@ -38,4 +38,3 @@ class QwikGitApp extends Component {
 const styles = StyleSheet.create({
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
