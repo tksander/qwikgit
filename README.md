@@ -24,6 +24,9 @@ Technology
 - Javascript [ES6] (http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 - Organization/Issue Tracking: [waffle.io](https://waffle.io)
 
+React Architecture:
+- Navigator Experimental
+- Redux
 
 #### Shout Outs
 - John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
