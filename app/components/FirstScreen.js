@@ -9,7 +9,6 @@ const FirstScreen = (props) => {
 		<View style={styles.container}>
 			<Text style={styles.title}>Search for a Github User</Text>
       <SearchBar />
-
 			<NavButton destLabel="Second" buttonHandler={props.onButtonPress} />
 		</View>
 	)
