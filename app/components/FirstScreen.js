@@ -2,14 +2,12 @@ import React, {PropTypes} from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
 import NavButton from './NavButton'
-import SearchBar from './SearchBar'
+import SearchView from './QwikGitSearchView'
 
 const FirstScreen = (props) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Search for a Github User</Text>
-      <SearchBar />
-			<NavButton destLabel="Second" buttonHandler={props.onButtonPress} />
+      <SearchView />
 		</View>
 	)
 }

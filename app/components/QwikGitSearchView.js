@@ -1,22 +1,18 @@
 // REFACTOR: PREVIOUSLY index.ios.js
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  Image,
   ListView,
-  ActivityIndicator,
-  Navigator,
 } from 'react-native';
 
-import User from './client/components/User.js'
-import SearchBar from './client/components/SearchBar.js'
-import githubService from './client/services/githubService.js'
+import User from './User.js'
+import SearchBar from './SearchBar.js'
+import githubService from '../services/githubService.js'
 
 
-class AwesomeProject extends Component {
+export default class AwesomeProject extends Component {
   constructor(props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -51,22 +47,15 @@ class AwesomeProject extends Component {
       )
     }
       return (
-          <Navigator
-            initialRoute={{ title: 'Search Scene', index: 0 }}
-            renderScene={(route, navigator) => {
-               return (
-                <View style={{
-                flex: 1,
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                }}>
-                  <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
-                  <SearchBar onUpdate={this.onUpdate.bind(this)}/>
-                </View>
-               )
-            }}
-          />
+        <View style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+          <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
+          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
+        </View>
       )
   }
 
@@ -119,4 +108,3 @@ class Repo extends Component {
 const styles = StyleSheet.create({
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
