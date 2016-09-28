@@ -7,12 +7,7 @@ const SecondScreen = (props) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Second Screen</Text>
-
 			<NavButton destLabel="Third" buttonHandler={props.onButtonPress} />
-
-			<View style={styles.spacer}>
-				<NavButton destLabel="Modal" buttonHandler={props.onModalButtonPress} />
-			</View>
 		</View>
 	)
 }
