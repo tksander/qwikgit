@@ -15,7 +15,7 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <View style={{alignSelf: 'stretch', paddingHorizontal: 40}}>
+      <View style={{alignSelf: 'stretch', paddingHorizontal: 20}}>
         <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onKeyPress={this._handleKeyPress.bind(this)}

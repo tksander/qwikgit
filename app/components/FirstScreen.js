@@ -7,7 +7,6 @@ import SearchView from './QwikGitSearchView'
 const FirstScreen = (props) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Search for a Github User</Text>
       <SearchView />
 			<NavButton destLabel="Second" buttonHandler={props.onButtonPress} />
 		</View>
