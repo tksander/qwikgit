@@ -77,7 +77,6 @@ export default class AwesomeProject extends Component {
 
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
-    debugger
     return (
       <UserCell
         key={user.id}
