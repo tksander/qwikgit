@@ -8,6 +8,7 @@ import First from './First'
 import Second from './Second'
 import Third from './Third'
 import Modal from './Modal'
+import UserScreen from './UserScreen'
 import { navigatePop } from '../actions'
 
 const {
@@ -57,6 +58,8 @@ class AppContainerWithCardStack extends React.Component {
 			return <Third />
 		case 'Modal':
 			return <Modal />
+		case 'User':
+			return <User />
 		}
 	}
 }

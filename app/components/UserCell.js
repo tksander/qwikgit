@@ -43,7 +43,6 @@ export default class UserCell extends Component {
     if (Platform.OS === 'android') {
       TouchableElement = TouchableNativeFeedback;
     }
-debugger 
     return (
       <View>
         <TouchableElement

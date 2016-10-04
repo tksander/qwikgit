@@ -75,12 +75,28 @@ export default class AwesomeProject extends Component {
   // PRIVATE METHODS
   //-----------------------------------
 
+  _selectUser: function(movie: Object) {
+    if (Platform.OS === 'ios') {
+      this.props.navigator.push({
+        title: movie.title,
+        component: MovieScreen,
+        passProps: {movie},
+      });
+    } else {
+      dismissKeyboard();
+      this.props.navigator.push({
+        title: movie.title,
+        name: 'movie',
+        movie: movie,
+      });
+    }
+  },
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
     return (
       <UserCell
         key={user.id}
-        onSelect={() => this.selectUser(user)}
+        onSelect={() => this._selectUser(user)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
         user={user}
