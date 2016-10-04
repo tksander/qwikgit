@@ -7,7 +7,7 @@ import {
   ListView,
 } from 'react-native';
 
-import User from './User.js'
+import UserCell from './UserCell.js'
 import SearchBar from './SearchBar.js'
 import githubService from '../services/githubService.js'
 
@@ -59,23 +59,6 @@ export default class AwesomeProject extends Component {
       )
   }
 
-  renderRow: function(
-    movie: Object,
-    sectionID: number | string,
-    rowID: number | string,
-    highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
-  ) {
-    return (
-      <MovieCell
-        key={movie.id}
-        onSelect={() => this.selectMovie(movie)}
-        onHighlight={() => highlightRowFunc(sectionID, rowID)}
-        onUnhighlight={() => highlightRowFunc(null, null)}
-        movie={movie}
-      />
-    );
-  }
-
   //-----------------------------------
   // PUBLIC METHODS
   //-----------------------------------
@@ -93,14 +76,10 @@ export default class AwesomeProject extends Component {
   //-----------------------------------
 
 
-  _renderRow: function(
-    user: Object,
-    sectionID: number | string,
-    rowID: number | string,
-    highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
-  ) {
+  _renderRow( user, sectionID, rowID, highlightRowFunc) {
+    debugger
     return (
-      <UserRow
+      <UserCell
         key={user.id}
         onSelect={() => this.selectUser(user)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
@@ -110,7 +89,6 @@ export default class AwesomeProject extends Component {
     );
   }
 
-  // Old User Person
   // _renderRow(rowData) {
    // return (<User login={rowData.login}/>)
   // }
