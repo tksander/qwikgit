@@ -5,10 +5,10 @@ import {NavigationExperimental, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
 
 import First from './First'
+// import UserScreen from './UserScreen'
 import Second from './Second'
 import Third from './Third'
 import Modal from './Modal'
-import UserScreen from './UserScreen'
 import { navigatePop } from '../actions'
 
 const {

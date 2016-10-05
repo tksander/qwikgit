@@ -75,7 +75,7 @@ export default class AwesomeProject extends Component {
   // PRIVATE METHODS
   //-----------------------------------
 
-  _selectUser: function(movie: Object) {
+  _selectUser(movie: Object) {
     if (Platform.OS === 'ios') {
       this.props.navigator.push({
         title: movie.title,
@@ -90,7 +90,7 @@ export default class AwesomeProject extends Component {
         movie: movie,
       });
     }
-  },
+  }
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
     return (
