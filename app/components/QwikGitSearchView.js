@@ -76,60 +76,36 @@ export default class AwesomeProject extends Component {
   //-----------------------------------
 
   _selectUser(movie: Object) {
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: movie.title,
-        component: MovieScreen,
-        passProps: {movie},
-      });
-    } else {
-      dismissKeyboard();
-      this.props.navigator.push({
-        title: movie.title,
-        name: 'movie',
-        movie: movie,
-      });
-    }
+      props.onButtonPress()
+    // if (Platform.OS === 'ios') {
+      // this.props.navigator.push({
+        // title: movie.title,
+        // component: MovieScreen,
+        // passProps: {movie},
+      // });
+    // } else {
+      // dismissKeyboard();
+      // this.props.navigator.push({
+        // title: movie.title,
+        // name: 'movie',
+        // movie: movie,
+      // });
+    // }
   }
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
+    debugger
+    // TODO This is lost because invoked inside another function. 
+    // Pass this in and invoke in selectUser.
     return (
       <UserCell
         key={user.id}
-        onSelect={() => this._selectUser(user)}
+        onSelect={() => props.onButtonPress()}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
         user={user}
       />
     );
-  }
-
-  // _renderRow(rowData) {
-   // return (<User login={rowData.login}/>)
-  // }
-
-}
-
-
-
-// <Header pic={{ uri:  this.state.avatarUrl }}></Header>
-class Header extends Component {
-  render() {
-    return (
-      <View>
-          <Image source={this.props.pic} style={{width: 80, height: 80}}/>
-      </View>
-    )
-  }
-}
-
-class Repo extends Component {
-  render() {
-    return (
-      <View style={styles.instructions}>
-       <Text> Repo name: {this.props.name} link: {this.props.link}</Text>
-      </View>
-    )
   }
 }
 
