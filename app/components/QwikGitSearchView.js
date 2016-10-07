@@ -41,7 +41,7 @@ export default class AwesomeProject extends Component {
           </View>
           <ListView
             dataSource={this.state.dataSource}
-            renderRow={this._renderRow}
+            renderRow={this._renderRow.bind(this)}
             />
         </View>
       )
@@ -76,6 +76,7 @@ export default class AwesomeProject extends Component {
   //-----------------------------------
 
   _selectUser(movie: Object) {
+   debugger 
       props.onButtonPress()
     // if (Platform.OS === 'ios') {
       // this.props.navigator.push({
@@ -94,13 +95,12 @@ export default class AwesomeProject extends Component {
   }
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
-    debugger
-    // TODO This is lost because invoked inside another function. 
+    // TODO This is lost because invoked inside another function.
     // Pass this in and invoke in selectUser.
     return (
       <UserCell
         key={user.id}
-        onSelect={() => props.onButtonPress()}
+        onSelect={() => this._selectUser(user)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
         user={user}
