@@ -77,7 +77,7 @@ export default class AwesomeProject extends Component {
 
   _selectUser(movie: Object) {
    debugger 
-    this.props.onButtonPress()
+    this.props.buttonHandler()
     // if (Platform.OS === 'ios') {
       // this.props.navigator.push({
         // title: movie.title,
