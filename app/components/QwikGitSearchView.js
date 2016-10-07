@@ -75,9 +75,8 @@ export default class AwesomeProject extends Component {
   // PRIVATE METHODS
   //-----------------------------------
 
-  _selectUser(movie: Object) {
-   debugger 
-    this.props.buttonHandler()
+  _selectUser(user: Object) {
+    this.props.buttonHandler(user)
     // if (Platform.OS === 'ios') {
       // this.props.navigator.push({
         // title: movie.title,

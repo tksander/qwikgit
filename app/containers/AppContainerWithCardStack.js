@@ -46,6 +46,7 @@ class AppContainerWithCardStack extends React.Component {
 	}
 
 	_renderScene({scene}) {
+    debugger
 		const { route } = scene
 
 		switch(route.key) {

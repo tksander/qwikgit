@@ -11,8 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onButtonPress: () => {
-			dispatch(navigatePush('Second'))
+		onButtonPress: (user) => {
+      debugger
+			dispatch(navigatePush(user))
 		}
 	}
 }
