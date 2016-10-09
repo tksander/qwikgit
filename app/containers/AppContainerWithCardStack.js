@@ -59,7 +59,7 @@ class AppContainerWithCardStack extends React.Component {
 		case 'Modal':
 			return <Modal />
 		case 'User':
-			return <User />
+			return <User user={route.state}/>
 		}
 	}
 }

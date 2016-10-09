@@ -12,7 +12,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onButtonPress: (user) => {
-      debugger
 			dispatch(navigatePush({
         key: 'User',
         title: 'User',

@@ -1,7 +1,9 @@
 import helpers from '../helpers.js';
 
 const services = {
-  searchUser
+  searchUser,
+  getUser,
+
 }
 
   function searchUser(user) {
@@ -13,6 +15,17 @@ const services = {
       .catch(error => {
         console.log('[Github Service] Error /search/users : '  + error);
         throw error;
+      })
+  }
+
+  function getUser(user) {
+    const url = 'https://api.github.com/users/' + user
+    return fetch(url)
+      .then(helpers.checkStatus)
+      .then(helpers.parseJson)
+      .then(data => data)
+      .catch(error => {
+        console.log('[Github Service] Error /user : '  + error);
       })
   }
 
