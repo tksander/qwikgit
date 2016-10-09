@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { View,
+         Image,
          Text,
          ActivityIndicator,
          StyleSheet} from 'react-native';
@@ -18,11 +19,17 @@ export default class User extends Component {
   // RENDERING
   //-----------------------------------
 
+  // avatar_url, bio, email, name, created_at, location
   render() {
     if(!(Object.keys(this.state.user).length === 0)) {
       return (
         <View>
-          <Text>TEst</Text>
+            <Image source={{uri: this.state.user.avatar_url}}
+                   style={{width: 40, height: 40}}/>
+            <Text>User: {this.state.user.name}</Text>
+            <Text>Email: {this.state.user.email}</Text>
+            <Text>Created: {this.state.user.created_at}</Text>
+            <Text>Location: {this.state.user.location}</Text>
         </View>
       )
     }
@@ -43,7 +50,6 @@ export default class User extends Component {
   componentDidMount() {
     githubService.getUser(this.props.user.login)
       .then(response => {
-        debugger
         this.setState({
             user: response
         })
