@@ -8,7 +8,6 @@ const FirstScreen = (props) => {
 	return (
 		<View style={styles.container}>
       <SearchView buttonHandler={props.onButtonPress}/>
-			<NavButton destLabel="Second" buttonHandler={props.onButtonPress} />
 		</View>
 	)
 }
