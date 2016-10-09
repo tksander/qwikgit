@@ -30,5 +30,6 @@ React Architecture:
 
 #### Shout Outs
 - This repo is a 'fork' of Eric Vicenti's Navigation Experimental [repo](https://github.com/ericvicenti/navigation-rfc)
+- React Native [Movie Example App](https://github.com/tksander/react-native/tree/master/Examples/Movies)
 - John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
 - React Native's excellent [docs](https://facebook.github.io/react-native/docs/)
