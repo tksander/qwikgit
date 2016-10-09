@@ -8,6 +8,7 @@ import First from './First'
 import Second from './Second'
 import Third from './Third'
 import Modal from './Modal'
+import User from './User'
 import { navigatePop } from '../actions'
 
 const {
@@ -46,7 +47,6 @@ class AppContainerWithCardStack extends React.Component {
 	}
 
 	_renderScene({scene}) {
-    debugger
 		const { route } = scene
 
 		switch(route.key) {
