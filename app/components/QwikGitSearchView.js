@@ -12,7 +12,7 @@ import SearchBar from './SearchBar.js'
 import githubService from '../services/githubService.js'
 
 
-export default class AwesomeProject extends Component {
+export default class SearchView extends Component {
   constructor(props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -35,7 +35,7 @@ export default class AwesomeProject extends Component {
   render() {
     if (this.state.dataSource.getRowCount() > 0) {
       return (
-        <View>
+        <View style={styles.container}>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
@@ -44,12 +44,7 @@ export default class AwesomeProject extends Component {
       )
     }
       return (
-        <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+        <View style={styles.container}>
           <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
           <SearchBar onUpdate={this.onUpdate.bind(this)}/>
         </View>
@@ -106,5 +101,14 @@ export default class AwesomeProject extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  default: {
+    flex: 1,
+}
 });
 
