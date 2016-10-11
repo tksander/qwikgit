@@ -36,9 +36,6 @@ export default class AwesomeProject extends Component {
     if (this.state.dataSource.getRowCount() > 0) {
       return (
         <View>
-          <Text>QwikGit</Text>
-          <View>
-          </View>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}

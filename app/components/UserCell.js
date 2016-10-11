@@ -49,17 +49,46 @@ export default class UserCell extends Component {
           onPress={this.props.onSelect}
           onShowUnderlay={this.props.onHighlight}
           onHideUnderlay={this.props.onUnhighlight}>
-          <View style={styles.row}>
-            <Text>User: {this.props.user.login}</Text>
-            <Image source={{uri: this.props.user.avatar_url}}
-                   style={{width: 40, height: 40}}/>
+
+        <View style={styles.row}>
+          <Image source={{uri: this.props.user.avatar_url}}
+          style={styles.cellImage}/>
+          <View style={styles.textContainer}>
+            <Text style={styles.userLogin}>User: {this.props.user.login}</Text>
           </View>
+        </View>
         </TouchableElement>
       </View>
     );
   }
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
+  textContainer: {
+    flex: 1,
+  },
+  userLogin: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 2,
+  },
+  row: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    padding: 5,
+  },
+  cellImage: {
+    backgroundColor: '#dddddd',
+    height: 93,
+    marginRight: 10,
+    width: 60,
+  },
+  cellBorder: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 4,
+  },
 });
 
