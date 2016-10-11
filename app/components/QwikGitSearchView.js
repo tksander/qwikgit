@@ -39,6 +39,7 @@ export default class SearchView extends Component {
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
+            style={{alignSelf: 'stretch'}}
             />
         </View>
       )

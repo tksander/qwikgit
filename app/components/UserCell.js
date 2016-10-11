@@ -53,10 +53,10 @@ export default class UserCell extends Component {
         <View style={styles.row}>
           <Image source={{uri: this.props.user.avatar_url}}
           style={styles.cellImage}/>
-          <View style={styles.textContainer}>
-            <Text style={styles.userLogin}>User: {this.props.user.login}</Text>
-          </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.userLogin}>{this.props.user.login}</Text>
         </View>
+      </View>
         </TouchableElement>
       </View>
     );
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   userLogin: {
     flex: 1,
     fontSize: 16,
-    fontWeight: '500',
     marginBottom: 2,
   },
   row: {

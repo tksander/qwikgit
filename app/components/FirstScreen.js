@@ -7,7 +7,7 @@ import SearchView from './QwikGitSearchView'
 const FirstScreen = (props) => {
 	return (
 		<View style={styles.container}>
-      <SearchView buttonHandler={props.onButtonPress}/>
+      <SearchView buttonHandler={props.onButtonPress} style={{flex: 1}}/>
 		</View>
 	)
 }
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'stretch'
 	},
 	title: {
 		fontSize: 24,
