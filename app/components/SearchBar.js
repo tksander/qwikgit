@@ -20,7 +20,9 @@ export default class SearchBar extends Component {
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onKeyPress={this._handleKeyPress.bind(this)}
             onChangeText={(moreText) => this.setState({text: moreText})}
-            placeholder="Search a user..."
+            placeholder="Search for a user..."
+            autoCapitalize="words"
+            auotCorrect="false"
         />
       </View>
     );
