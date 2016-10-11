@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 
 import First from './First'
 import Second from './Second'
-import Third from './Third'
-import Modal from './Modal'
 import User from './User'
 import { navigatePop } from '../actions'
 
