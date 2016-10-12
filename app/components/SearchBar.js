@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View,
+         Text,
+         TextInput,
+         ActivityIndicator,
+         StyleSheet} from 'react-native';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -15,14 +19,18 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <View style={{alignSelf: 'stretch', paddingHorizontal: 20, flex: 1}}>
+      <View style={styles.searchBar}>
         <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={styles.searchBarInput}
             onKeyPress={this._handleKeyPress.bind(this)}
             onChangeText={(moreText) => this.setState({text: moreText})}
-            placeholder="Search for a user..."
+            placeholder=" Search for a user..."
             autoCapitalize="words"
             auotCorrect="false"
+        />
+        <ActivityIndicator
+          animating={this.props.isLoading}
+          style={styles.spinner}
         />
       </View>
     );
@@ -42,3 +50,22 @@ export default class SearchBar extends Component {
     this.props.onUpdate(text)
   }
 }
+
+const styles = StyleSheet.create({
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flex: 1,
+  },
+  searchBarInput: {
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1,
+    flex: 1,
+  },
+  spinner: {
+    width: 30,
+  },
+});

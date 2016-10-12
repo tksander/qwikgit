@@ -39,15 +39,14 @@ export default class SearchView extends Component {
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
-            style={{alignSelf: 'stretch'}}
             />
         </View>
       )
     }
       return (
         <View style={styles.container}>
-          <Text style={{paddingVertical: 20}}>Search for a Github User</Text>
           <SearchBar onUpdate={this.onUpdate.bind(this)}/>
+          <View style={styles.separator} />
         </View>
       )
   }
@@ -70,25 +69,9 @@ export default class SearchView extends Component {
 
   _selectUser(user: Object) {
     this.props.buttonHandler(user)
-    // if (Platform.OS === 'ios') {
-      // this.props.navigator.push({
-        // title: movie.title,
-        // component: MovieScreen,
-        // passProps: {movie},
-      // });
-    // } else {
-      // dismissKeyboard();
-      // this.props.navigator.push({
-        // title: movie.title,
-        // name: 'movie',
-        // movie: movie,
-      // });
-    // }
   }
 
   _renderRow( user, sectionID, rowID, highlightRowFunc) {
-    // TODO This is lost because invoked inside another function.
-    // Pass this in and invoke in selectUser.
     return (
       <UserCell
         key={user.id}
@@ -104,9 +87,10 @@ export default class SearchView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#eeeeee',
   },
   default: {
     flex: 1,
