@@ -41,6 +41,8 @@ export default class SearchBar extends Component {
   //-----------------------------------
 
   _handleKeyPress(event) {
+    debugger
+    console.log('EVENT', event)
     if (event.nativeEvent.key === 'Enter') {
       this._update(this.state.text)
     }

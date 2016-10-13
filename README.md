@@ -16,6 +16,10 @@ You will need Xcode, node.js, and React Native command line tools installed:
 
 More information can be found at the [React Native Getting Started docs](https://facebook.github.io/react-native/docs/getting-started.html).
 
+Debugging
+---
+[Debugging with Stetho](https://facebook.github.io/react-native/docs/debugging.html#debugging-with-stetho-http-facebook-github-io-stetho-on-android) on Androidc
+
 Technology
 ---
 
