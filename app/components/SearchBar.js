@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBarInput: {
-    height: 30,
+    height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     flex: 1,
