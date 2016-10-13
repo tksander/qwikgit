@@ -26,7 +26,15 @@ export default class SearchView extends Component {
       filter: '',
       queryNumber: 0,
     }
+    this.resultsCache = {
+      dataForQuery: {},
+      nextPageNumberForQuery: {},
+      totalForQuery: {},
+    };
+    this.LOADING = {};
   }
+
+
 
   //-----------------------------------
   // LIFECYCLE
@@ -64,16 +72,17 @@ export default class SearchView extends Component {
   //-----------------------------------
   //
 
+  // TODO: Break out into private functions
   searchMovies: function(query: string) {
     this.timeoutID = null;
 
     this.setState({filter: query});
 
-    var cachedResultsForQuery = resultsCache.dataForQuery[query];
+    var cachedResultsForQuery = this.resultsCache.dataForQuery[query];
     if (cachedResultsForQuery) {
-      if (!LOADING[query]) {
+      if (!this.LOADING[query]) {
         this.setState({
-          dataSource: this.getDataSource(cachedResultsForQuery),
+          dataSource: this._getDataSource(cachedResultsForQuery),
           isLoading: false
         });
       } else {
@@ -82,30 +91,31 @@ export default class SearchView extends Component {
       return;
     }
 
-    LOADING[query] = true;
-    resultsCache.dataForQuery[query] = null;
+    this.LOADING[query] = true;
+    this.resultsCache.dataForQuery[query] = null;
     this.setState({
       isLoading: true,
       queryNumber: this.state.queryNumber + 1,
       isLoadingTail: false,
     });
 
+    // TODO replace with github service
     fetch(this._urlForQueryAndPage(query, 1))
       .then((response) => response.json())
       .catch((error) => {
-        LOADING[query] = false;
-        resultsCache.dataForQuery[query] = undefined;
+        this.LOADING[query] = false;
+        this.resultsCache.dataForQuery[query] = undefined;
 
         this.setState({
-          dataSource: this.getDataSource([]),
+          dataSource: this._getDataSource([]),
           isLoading: false,
         });
       })
       .then((responseData) => {
-        LOADING[query] = false;
-        resultsCache.totalForQuery[query] = responseData.total;
-        resultsCache.dataForQuery[query] = responseData.movies;
-        resultsCache.nextPageNumberForQuery[query] = 2;
+        this.LOADING[query] = false;
+        this.resultsCache.totalForQuery[query] = responseData.total;
+        this.resultsCache.dataForQuery[query] = responseData.movies;
+        this.resultsCache.nextPageNumberForQuery[query] = 2;
 
         if (this.state.filter !== query) {
           // do not update state if the query is stale
@@ -114,7 +124,7 @@ export default class SearchView extends Component {
 
         this.setState({
           isLoading: false,
-          dataSource: this.getDataSource(responseData.movies),
+          dataSource: this._getDataSource(responseData.movies),
         });
       })
       .done();
@@ -139,6 +149,11 @@ export default class SearchView extends Component {
   //-----------------------------------
   // PRIVATE METHODS
   //-----------------------------------
+  //
+
+  _getDataSource: function(users: Array<any>): ListView.DataSource {
+    return this.state.dataSource.cloneWithRows(users);
+  },
 
   _selectUser(user: Object) {
     this.props.buttonHandler(user)
