@@ -21,11 +21,19 @@ export default class SearchView extends Component {
       avatarUrl: '',
       repos: null,
       text: '',
+      isLoading: false,
+      isLoadingTail: false,
+      filter: '',
+      queryNumber: 0,
     }
   }
 
-  componentDidMount() {
-  }
+  //-----------------------------------
+  // LIFECYCLE
+  //-----------------------------------
+  componentDidMount: function() {
+    this.searchMovies('');
+  },
 
 
   //-----------------------------------
@@ -45,7 +53,7 @@ export default class SearchView extends Component {
     }
       return (
         <View style={styles.container}>
-          <SearchBar onUpdate={this.onUpdate.bind(this)}/>
+          <SearchBar onSearchChange={this.onSearchChange} />
           <View style={styles.separator} />
         </View>
       )
@@ -54,14 +62,79 @@ export default class SearchView extends Component {
   //-----------------------------------
   // PUBLIC METHODS
   //-----------------------------------
+  //
 
-  onUpdate(text) {
-    githubService.searchUser(text).then(response => {
+  searchMovies: function(query: string) {
+    this.timeoutID = null;
+
+    this.setState({filter: query});
+
+    var cachedResultsForQuery = resultsCache.dataForQuery[query];
+    if (cachedResultsForQuery) {
+      if (!LOADING[query]) {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(response.items)
-        })
+          dataSource: this.getDataSource(cachedResultsForQuery),
+          isLoading: false
+        });
+      } else {
+        this.setState({isLoading: true});
+      }
+      return;
+    }
+
+    LOADING[query] = true;
+    resultsCache.dataForQuery[query] = null;
+    this.setState({
+      isLoading: true,
+      queryNumber: this.state.queryNumber + 1,
+      isLoadingTail: false,
+    });
+
+    fetch(this._urlForQueryAndPage(query, 1))
+      .then((response) => response.json())
+      .catch((error) => {
+        LOADING[query] = false;
+        resultsCache.dataForQuery[query] = undefined;
+
+        this.setState({
+          dataSource: this.getDataSource([]),
+          isLoading: false,
+        });
       })
-  }
+      .then((responseData) => {
+        LOADING[query] = false;
+        resultsCache.totalForQuery[query] = responseData.total;
+        resultsCache.dataForQuery[query] = responseData.movies;
+        resultsCache.nextPageNumberForQuery[query] = 2;
+
+        if (this.state.filter !== query) {
+          // do not update state if the query is stale
+          return;
+        }
+
+        this.setState({
+          isLoading: false,
+          dataSource: this.getDataSource(responseData.movies),
+        });
+      })
+      .done();
+  },
+
+  onSearchChange: function(event: Object) {
+    var filter = event.nativeEvent.text.toLowerCase();
+
+    this.clearTimeout(this.timeoutID);
+    this.timeoutID = this.setTimeout(() => this.searchMovies(filter), 100);
+  },
+
+  // Old Method
+  // onUpdate(text) {
+    // githubService.searchUser(text).then(response => {
+        // this.setState({
+          // dataSource: this.state.dataSource.cloneWithRows(response.items)
+        // })
+      // })
+  // }
 
   //-----------------------------------
   // PRIVATE METHODS
