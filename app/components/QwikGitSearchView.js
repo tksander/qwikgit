@@ -39,9 +39,9 @@ export default class SearchView extends Component {
   //-----------------------------------
   // LIFECYCLE
   //-----------------------------------
-  componentDidMount: function() {
-    this.searchMovies('');
-  },
+  componentDidMount() {
+    this._searchUsers('');
+  }
 
 
   //-----------------------------------
@@ -73,7 +73,7 @@ export default class SearchView extends Component {
   //
 
   // TODO: Break out into private functions
-  searchMovies: function(query: string) {
+  _searchUsers(query: string) {
     this.timeoutID = null;
 
     this.setState({filter: query});
@@ -128,14 +128,14 @@ export default class SearchView extends Component {
         });
       })
       .done();
-  },
+  }
 
-  onSearchChange: function(event: Object) {
-    var filter = event.nativeEvent.text.toLowerCase();
+  onSearchChange(event: Object) {
+    const filter = event.nativeEvent.text.toLowerCase();
 
     this.clearTimeout(this.timeoutID);
-    this.timeoutID = this.setTimeout(() => this.searchMovies(filter), 100);
-  },
+    this.timeoutID = this.setTimeout(() => this._searchUsers(filter), 100);
+  }
 
   // Old Method
   // onUpdate(text) {
@@ -151,9 +151,9 @@ export default class SearchView extends Component {
   //-----------------------------------
   //
 
-  _getDataSource: function(users: Array<any>): ListView.DataSource {
+  _getDataSource(users: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(users);
-  },
+  }
 
   _selectUser(user: Object) {
     this.props.buttonHandler(user)
