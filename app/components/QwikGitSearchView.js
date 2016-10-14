@@ -99,8 +99,39 @@ export default class SearchView extends Component {
       isLoadingTail: false,
     });
 
-    // TODO replace with github service
-    fetch(this._urlForQueryAndPage(query, 1))
+    githubService.searchUser(query).then(response => {
+      // TODO
+      debugger
+      this.LOADING[query] = false;
+
+      // TODO
+      this.resultsCache.totalForQuery[query] = responseData.total;
+      this.resultsCache.dataForQuery[query] = responseData.items;
+
+      // TODO what does this do
+      this.resultsCache.nextPageNumberForQuery[query] = 2;
+
+      if (this.state.filter !== query) {
+        // do not update state if the query is stale
+        return;
+      }
+
+      this.setState({
+        isLoading: false,
+        dataSource: this._getDataSource(responseData.items),
+      });
+     })
+    .catch((error) => {
+       this.LOADING[query] = false;
+       this.resultsCache.dataForQuery[query] = undefined;
+       this.setState({
+        dataSource: this._getDataSource([]),
+         isLoading: false,
+       });
+    })
+
+    /*
+     * fetch(this._urlForQueryAndPage(query, 1))
       .then((response) => response.json())
       .catch((error) => {
         this.LOADING[query] = false;
@@ -127,7 +158,7 @@ export default class SearchView extends Component {
           dataSource: this._getDataSource(responseData.movies),
         });
       })
-      .done();
+      .done();*/
   }
 
   onSearchChange(event: Object) {
