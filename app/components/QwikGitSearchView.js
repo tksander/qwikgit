@@ -10,6 +10,7 @@ import {
 import UserCell from './UserCell.js'
 import SearchBar from './SearchBar.js'
 import githubService from '../services/githubService.js'
+import NoUsers from './NoUsers.js'
 
 
 export default class SearchView extends Component {
@@ -49,28 +50,151 @@ export default class SearchView extends Component {
   //-----------------------------------
 
   render() {
-    if (this.state.dataSource.getRowCount() > 0) {
-      return (
+
+    let content = this.state.dataSource.getRowCount() === 0 ?
+      <NoUsers
+        filter={this.state.filter}
+        isLoading={this.state.isLoading}
+      /> :
         <View style={styles.container}>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
+            // New attributes
+            renderSeparator={this.renderSeparator}
+            renderFooter={this.renderFooter}
+            onEndReached={this.onEndReached}
             />
         </View>
-      )
-    }
-      return (
-        <View style={styles.container}>
-          <SearchBar onSearchChange={this.onSearchChange} />
-          <View style={styles.separator} />
-        </View>
-      )
+
+
+    return (
+      <View style={styles.container}>
+        <SearchBar
+          onSearchChange={this.onSearchChange}
+          isLoading={this.state.isLoading}
+          onFocus={() =>
+            this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
+        />
+        <View style={styles.separator} />
+        {content}
+      </View>
+    );
   }
 
   //-----------------------------------
   // PUBLIC METHODS
   //-----------------------------------
   //
+
+
+    /*
+     * fetch(this._urlForQueryAndPage(query, 1))
+      .then((response) => response.json())
+      .catch((error) => {
+        this.LOADING[query] = false;
+        this.resultsCache.dataForQuery[query] = undefined;
+
+        this.setState({
+          dataSource: this._getDataSource([]),
+          isLoading: false,
+        });
+      })
+      .then((responseData) => {
+        this.LOADING[query] = false;
+        this.resultsCache.totalForQuery[query] = responseData.total;
+        this.resultsCache.dataForQuery[query] = responseData.movies;
+        this.resultsCache.nextPageNumberForQuery[query] = 2;
+
+        if (this.state.filter !== query) {
+          // do not update state if the query is stale
+          return;
+        }
+
+        this.setState({
+          isLoading: false,
+          dataSource: this._getDataSource(responseData.movies),
+        });
+      })
+      .done();*/
+  }
+
+  onSearchChange(event: Object) {
+    const filter = event.nativeEvent.text.toLowerCase();
+
+    this.clearTimeout(this.timeoutID);
+    this.timeoutID = this.setTimeout(() => this._searchUsers(filter), 100);
+  }
+
+  // Old Method
+  // onUpdate(text) {
+    // githubService.searchUser(text).then(response => {
+        // this.setState({
+          // dataSource: this.state.dataSource.cloneWithRows(response.items)
+        // })
+      // })
+  // }
+
+  //-----------------------------------
+  // PRIVATE METHODS
+  //-----------------------------------
+  //
+
+  onEndReached() {
+    var query = this.state.filter;
+    if (!this.hasMore() || this.state.isLoadingTail) {
+      // We're already fetching or have all the elements so noop
+      return;
+    }
+
+    if (LOADING[query]) {
+      return;
+    }
+
+    LOADING[query] = true;
+    this.setState({
+      queryNumber: this.state.queryNumber + 1,
+      isLoadingTail: true,
+    });
+
+    var page = resultsCache.nextPageNumberForQuery[query];
+    invariant(page != null, 'Next page number for "%s" is missing', query);
+    fetch(this._urlForQueryAndPage(query, page))
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+        LOADING[query] = false;
+        this.setState({
+          isLoadingTail: false,
+        });
+      })
+      .then((responseData) => {
+        var moviesForQuery = resultsCache.dataForQuery[query].slice();
+
+        LOADING[query] = false;
+        // We reached the end of the list before the expected number of results
+        if (!responseData.movies) {
+          resultsCache.totalForQuery[query] = moviesForQuery.length;
+        } else {
+          for (var i in responseData.movies) {
+            moviesForQuery.push(responseData.movies[i]);
+          }
+          resultsCache.dataForQuery[query] = moviesForQuery;
+          resultsCache.nextPageNumberForQuery[query] += 1;
+        }
+
+        if (this.state.filter !== query) {
+          // do not update state if the query is stale
+          return;
+        }
+
+        this.setState({
+          isLoadingTail: false,
+          dataSource: this.getDataSource(resultsCache.dataForQuery[query]),
+        });
+      })
+      .done();
+  }
 
   // TODO: Break out into private functions
   _searchUsers(query: string) {
@@ -129,59 +253,6 @@ export default class SearchView extends Component {
          isLoading: false,
        });
     })
-
-    /*
-     * fetch(this._urlForQueryAndPage(query, 1))
-      .then((response) => response.json())
-      .catch((error) => {
-        this.LOADING[query] = false;
-        this.resultsCache.dataForQuery[query] = undefined;
-
-        this.setState({
-          dataSource: this._getDataSource([]),
-          isLoading: false,
-        });
-      })
-      .then((responseData) => {
-        this.LOADING[query] = false;
-        this.resultsCache.totalForQuery[query] = responseData.total;
-        this.resultsCache.dataForQuery[query] = responseData.movies;
-        this.resultsCache.nextPageNumberForQuery[query] = 2;
-
-        if (this.state.filter !== query) {
-          // do not update state if the query is stale
-          return;
-        }
-
-        this.setState({
-          isLoading: false,
-          dataSource: this._getDataSource(responseData.movies),
-        });
-      })
-      .done();*/
-  }
-
-  onSearchChange(event: Object) {
-    const filter = event.nativeEvent.text.toLowerCase();
-
-    this.clearTimeout(this.timeoutID);
-    this.timeoutID = this.setTimeout(() => this._searchUsers(filter), 100);
-  }
-
-  // Old Method
-  // onUpdate(text) {
-    // githubService.searchUser(text).then(response => {
-        // this.setState({
-          // dataSource: this.state.dataSource.cloneWithRows(response.items)
-        // })
-      // })
-  // }
-
-  //-----------------------------------
-  // PRIVATE METHODS
-  //-----------------------------------
-  //
-
   _getDataSource(users: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(users);
   }
