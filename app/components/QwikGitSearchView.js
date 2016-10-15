@@ -43,6 +43,9 @@ export default class SearchView extends Component {
   componentDidMount() {
     this._searchUsers('');
   }
+  componentWillUnmount() {
+      clearTimeout(this.timer)
+  }
 
 
   //-----------------------------------
@@ -71,7 +74,7 @@ export default class SearchView extends Component {
     return (
       <View style={styles.container}>
         <SearchBar
-          onSearchChange={this.onSearchChange}
+          onSearchChange={this.onSearchChange.bind(this)}
           isLoading={this.state.isLoading}
           onFocus={() =>
             this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
@@ -116,14 +119,16 @@ export default class SearchView extends Component {
           dataSource: this._getDataSource(responseData.movies),
         });
       })
-      .done();*/
+      .done();
   }
+*/
 
   onSearchChange(event: Object) {
     const filter = event.nativeEvent.text.toLowerCase();
 
-    this.clearTimeout(this.timeoutID);
-    this.timeoutID = this.setTimeout(() => this._searchUsers(filter), 100);
+    let that = this
+    clearTimeout(this.timeoutID);
+    this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 100)
   }
 
   // Old Method
@@ -198,6 +203,7 @@ export default class SearchView extends Component {
 
   // TODO: Break out into private functions
   _searchUsers(query: string) {
+    console.log('[SearchView] search users query:' + query)
     this.timeoutID = null;
 
     this.setState({filter: query});
@@ -224,8 +230,8 @@ export default class SearchView extends Component {
     });
 
     githubService.searchUser(query).then(response => {
-      // TODO
       debugger
+      // TODO
       this.LOADING[query] = false;
 
       // TODO
@@ -253,6 +259,8 @@ export default class SearchView extends Component {
          isLoading: false,
        });
     })
+  }
+
   _getDataSource(users: Array<any>): ListView.DataSource {
     return this.state.dataSource.cloneWithRows(users);
   }
@@ -273,6 +281,7 @@ export default class SearchView extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
