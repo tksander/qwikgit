@@ -107,6 +107,7 @@ export default class SearchView extends Component {
   _hasMore() {
     var query = this.state.filter;
     if (!this.resultsCache.dataForQuery[query]) {
+      console.log('[SearchView]: hasMore:  No more results ')
       return true;
     }
     return (
@@ -127,8 +128,9 @@ export default class SearchView extends Component {
     console.log('[SearchView]: End Reached')
     var query = this.state.filter;
     if (!this._hasMore() || this.state.isLoadingTail) {
-      debugger
-      console.log('[SearchView]: No more results ')
+      console.log('[SearchView]: No more results or alredy fetching results')
+      console.log('[SearchView]: onEndReached: hasMore: ' + this._hasMore())
+      console.log('[SearchView]: onEndReached: isLoadingTail: ' + this.state.isLoadingTail)
       // We're already fetching or have all the elements so noop
       return;
     }
@@ -147,10 +149,9 @@ export default class SearchView extends Component {
     let page = this.resultsCache.nextPageNumberForQuery[query];
     invariant(page != null, 'Next page number for "%s" is missing', query);
     // fetch(this._urlForQueryAndPage(query, page))
-    
-      console.log('[SearchView]: Github service searching: ' + query, page)
     githubService.searchUser(query, page)
       .then(function(responseData) {
+      console.log('[SearchView]: onEndReached: Github service results: ' + responseData)
         let usersForQuery = this.resultsCache.dataForQuery[query].slice();
 
         this.LOADING[query] = false;
@@ -166,7 +167,7 @@ export default class SearchView extends Component {
         }
 
         if (this.state.filter !== query) {
-      console.log('[SearchView]: State Data, not updating state')
+          console.log('[SearchView]: State Data, not updating state')
           // do not update state if the query is stale
           return;
         }
@@ -215,6 +216,7 @@ export default class SearchView extends Component {
 
     githubService.searchUser(query)
       .then(function(responseData) {
+      console.log('[SearchView]: searchUser: Github service results: ' + responseData)
 
       this.LOADING[query] = false;
 

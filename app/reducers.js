@@ -6,7 +6,7 @@ import { NAV_PUSH, NAV_POP, NAV_JUMP_TO_KEY, NAV_JUMP_TO_INDEX, NAV_RESET } from
 const initialNavState = {
 	index: 0,
 	routes: [
-		{ key: 'First', title: 'First' }
+		{ key: 'QwikGit', title: 'QwikGit' }
 	]
 }
 

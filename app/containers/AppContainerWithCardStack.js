@@ -48,7 +48,7 @@ class AppContainerWithCardStack extends React.Component {
 		const { route } = scene
 
 		switch(route.key) {
-		case 'First':
+		case 'QwikGit':
 			return <First />
 		case 'Second':
 			return <Second />
