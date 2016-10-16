@@ -34,6 +34,5 @@ React Architecture:
 
 #### Shout Outs
 - This repo borrows heavily from this Navigation Experimental example [repo](https://github.com/jlyman/RN-NavigationExperimental-Redux-Example) and React Native's Movie example [app](https://github.com/tksander/react-native/tree/master/Examples/Movies)
-- React Native [Movie Example App](https://github.com/tksander/react-native/tree/master/Examples/Movies)
 - John Anderson's [KIM](https://github.com/jfanderson/KIM/) repo for Style inspiration
 - React Native's excellent [docs](https://facebook.github.io/react-native/docs/)
