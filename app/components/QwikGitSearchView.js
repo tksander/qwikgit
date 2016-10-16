@@ -1,6 +1,7 @@
 // REFACTOR: PREVIOUSLY index.ios.js
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   View,
@@ -11,7 +12,7 @@ import UserCell from './UserCell.js'
 import SearchBar from './SearchBar.js'
 import githubService from '../services/githubService.js'
 import NoUsers from './NoUsers.js'
-
+let invariant = require('invariant');
 
 export default class SearchView extends Component {
   constructor(props) {
@@ -65,8 +66,8 @@ export default class SearchView extends Component {
             renderRow={this._renderRow.bind(this)}
             // New attributes
             renderSeparator={this.renderSeparator}
-            // renderFooter={this.renderFooter.bind(this)}
-            // onEndReached={this.onEndReached.bind(this)}
+            renderFooter={this._renderFooter.bind(this)}
+            onEndReached={this._onEndReached.bind(this)}
             />
         </View>
 
@@ -102,49 +103,60 @@ export default class SearchView extends Component {
   // PRIVATE METHODS
   //-----------------------------------
   //
-
-  onEndReached() {
-    debugger
+  //
+  _hasMore() {
     var query = this.state.filter;
-    if (!this.hasMore() || this.state.isLoadingTail) {
+    if (!this.resultsCache.dataForQuery[query]) {
+      return true;
+    }
+    return (
+      this.resultsCache.totalForQuery[query] !==
+      this.resultsCache.dataForQuery[query].length
+    );
+  }
+
+  _renderFooter() {
+    if (!this._hasMore() || !this.state.isLoadingTail) {
+      return <View style={styles.scrollSpinner} />;
+    }
+
+    return <ActivityIndicator style={styles.scrollSpinner} />;
+  }
+
+  _onEndReached() {
+    var query = this.state.filter;
+    if (!this._hasMore() || this.state.isLoadingTail) {
       // We're already fetching or have all the elements so noop
       return;
     }
 
-    if (LOADING[query]) {
+    if (this.LOADING[query]) {
       return;
     }
 
-    LOADING[query] = true;
+    this.LOADING[query] = true;
     this.setState({
       queryNumber: this.state.queryNumber + 1,
       isLoadingTail: true,
     });
 
-    var page = resultsCache.nextPageNumberForQuery[query];
+    let page = this.resultsCache.nextPageNumberForQuery[query];
     invariant(page != null, 'Next page number for "%s" is missing', query);
-    fetch(this._urlForQueryAndPage(query, page))
-      .then((response) => response.json())
-      .catch((error) => {
-        console.error(error);
-        LOADING[query] = false;
-        this.setState({
-          isLoadingTail: false,
-        });
-      })
-      .then((responseData) => {
-        var moviesForQuery = resultsCache.dataForQuery[query].slice();
+    // fetch(this._urlForQueryAndPage(query, page))
+    githubService.searchUser(query, page)
+      .then(function(responseData) {
+        let usersForQuery = this.resultsCache.dataForQuery[query].slice();
 
-        LOADING[query] = false;
+        this.LOADING[query] = false;
         // We reached the end of the list before the expected number of results
-        if (!responseData.movies) {
-          resultsCache.totalForQuery[query] = moviesForQuery.length;
+        if (!responseData.items) {
+          this.resultsCache.totalForQuery[query] = usersForQuery.length;
         } else {
-          for (var i in responseData.movies) {
-            moviesForQuery.push(responseData.movies[i]);
+          for (var i in responseData.items) {
+            usersForQuery.push(responseData.items[i]);
           }
-          resultsCache.dataForQuery[query] = moviesForQuery;
-          resultsCache.nextPageNumberForQuery[query] += 1;
+          this.resultsCache.dataForQuery[query] = usersForQuery;
+          this.resultsCache.nextPageNumberForQuery[query] += 1;
         }
 
         if (this.state.filter !== query) {
@@ -154,10 +166,16 @@ export default class SearchView extends Component {
 
         this.setState({
           isLoadingTail: false,
-          dataSource: this.getDataSource(resultsCache.dataForQuery[query]),
-        });
+          dataSource: this._getDataSource(this.resultsCache.dataForQuery[query]),
+        })
+      }.bind(this))
+      .catch(function(error) {
+        console.error(error);
+        this.LOADING[query] = false;
+        this.setState({
+          isLoadingTail: false,
+        }.bind(this));
       })
-      .done();
   }
 
   // TODO: Break out into private functions
@@ -202,7 +220,6 @@ export default class SearchView extends Component {
 
       if (this.state.filter !== query) {
         // do not update state if the query is stale
-        debugger
         return;
       }
 
@@ -211,8 +228,8 @@ export default class SearchView extends Component {
         dataSource: this._getDataSource(responseData.items),
       });
      }.bind(this))
+     // TODO remove old function syntax for bind
     .catch(function(error) {
-      debugger
       console.log('[SearchView] error retrieving user: ' + error)
        this.LOADING[query] = false;
        this.resultsCache.dataForQuery[query] = undefined;

@@ -6,8 +6,10 @@ const services = {
 
 }
 
-  function searchUser(user) {
-    const url = 'https://api.github.com/search/users?q=' + user + '&per_page=20'
+  function searchUser(user, page) {
+  
+    const url = 'https://api.github.com/search/users?q=' + user + '&per_page=20' + 
+                  '&page=' + page
     return fetch(url)
       // .then(helpers.checkStatus)
       // .then(helpers.parseJson)
