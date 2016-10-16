@@ -13,7 +13,8 @@ const services = {
       .then(helpers.parseJson)
       .then(data => data)
       .catch(error => {
-        console.log('[Github Service] Error /search/users : '  + error.toString());
+        console.log('[Github Service] Error /search/users : '  + error);
+        throw error;
       })
   }
 
@@ -25,6 +26,7 @@ const services = {
       .then(data => data)
       .catch(error => {
         console.log('[Github Service] Error /user : '  + error);
+        throw error;
       })
   }
 
