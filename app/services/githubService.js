@@ -13,6 +13,7 @@ const services = {
       .then(helpers.parseJson)
       .then(data => data)
       .catch(error => {
+        debugger
         console.log('[Github Service] Error /search/users : '  + error);
         throw error;
       })

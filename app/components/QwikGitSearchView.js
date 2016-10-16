@@ -91,11 +91,12 @@ export default class SearchView extends Component {
   //
 
   onSearchChange(event: Object) {
+    debugger
     var that = this
     const filter = event.nativeEvent.text.toLowerCase();
 
     clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 100)
+    this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 1000)
   }
 
   //-----------------------------------
@@ -191,6 +192,7 @@ export default class SearchView extends Component {
     that = this
     githubService.searchUser(query)
       .then((responseData) => {
+        debugger
       // TODO
       this.LOADING[query] = false;
 

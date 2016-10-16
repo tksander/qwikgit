@@ -5,16 +5,17 @@ const helpers = {
 
 
 function checkStatus(res) {
-  if (res.status >= 200 && res.status < 300) {
+  debugger
+  // if (res.status >= 200 && res.status < 300) {
     return res;
-  }
+  // }
 
-  let error = new Error(res.statusText);
-  error.res = res;
-  throw error;
+  // let error = new Error(res.statusText);
+  // error.res = res;
 }
 
  function parseJson(res) {
+   debugger
   return res.json();
 }
 
