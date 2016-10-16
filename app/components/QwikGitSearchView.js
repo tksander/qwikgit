@@ -65,8 +65,8 @@ export default class SearchView extends Component {
             renderRow={this._renderRow.bind(this)}
             // New attributes
             renderSeparator={this.renderSeparator}
-            renderFooter={this.renderFooter}
-            onEndReached={this.onEndReached}
+            renderFooter={this.renderFooter.bind(this)}
+            onEndReached={this.onEndReached.bind(this)}
             />
         </View>
 
@@ -90,39 +90,6 @@ export default class SearchView extends Component {
   //-----------------------------------
   //
 
-
-    /*
-     * fetch(this._urlForQueryAndPage(query, 1))
-      .then((response) => response.json())
-      .catch((error) => {
-        this.LOADING[query] = false;
-        this.resultsCache.dataForQuery[query] = undefined;
-
-        this.setState({
-          dataSource: this._getDataSource([]),
-          isLoading: false,
-        });
-      })
-      .then((responseData) => {
-        this.LOADING[query] = false;
-        this.resultsCache.totalForQuery[query] = responseData.total;
-        this.resultsCache.dataForQuery[query] = responseData.movies;
-        this.resultsCache.nextPageNumberForQuery[query] = 2;
-
-        if (this.state.filter !== query) {
-          // do not update state if the query is stale
-          return;
-        }
-
-        this.setState({
-          isLoading: false,
-          dataSource: this._getDataSource(responseData.movies),
-        });
-      })
-      .done();
-  }
-*/
-
   onSearchChange(event: Object) {
     var that = this
     const filter = event.nativeEvent.text.toLowerCase();
@@ -130,15 +97,6 @@ export default class SearchView extends Component {
     clearTimeout(this.timeoutID);
     this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 100)
   }
-
-  // Old Method
-  // onUpdate(text) {
-    // githubService.searchUser(text).then(response => {
-        // this.setState({
-          // dataSource: this.state.dataSource.cloneWithRows(response.items)
-        // })
-      // })
-  // }
 
   //-----------------------------------
   // PRIVATE METHODS
