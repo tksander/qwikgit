@@ -128,7 +128,7 @@ export default class SearchView extends Component {
     const filter = event.nativeEvent.text.toLowerCase();
 
     clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout(() => {that._searchUsers(filter).bind(that)}, 100)
+    this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 100)
   }
 
   // Old Method
@@ -203,7 +203,6 @@ export default class SearchView extends Component {
 
   // TODO: Break out into private functions
   _searchUsers(query: string) {
-    debugger
     var that = this
     console.log('[SearchView] search users query:' + query)
     this.timeoutID = null;
@@ -231,10 +230,9 @@ export default class SearchView extends Component {
       isLoadingTail: false,
     });
 
-    debugger
+    that = this
     githubService.searchUser(query)
       .then((responseData) => {
-      debugger
       // TODO
       this.LOADING[query] = false;
 
@@ -256,7 +254,6 @@ export default class SearchView extends Component {
       });
      })
     .catch((error) => {
-      debugger
        this.LOADING[query] = false;
        this.resultsCache.dataForQuery[query] = undefined;
        this.setState({
@@ -290,7 +287,8 @@ export default class SearchView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
+    backgroundColor: 'white'
   },
   separator: {
     height: 1,

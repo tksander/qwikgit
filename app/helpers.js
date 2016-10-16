@@ -15,7 +15,6 @@ function checkStatus(res) {
 }
 
  function parseJson(res) {
-   debugger
   return res.json();
 }
 

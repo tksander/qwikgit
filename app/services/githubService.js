@@ -7,7 +7,6 @@ const services = {
 }
 
   function searchUser(user) {
-    debugger
     const url = 'https://api.github.com/search/users?q=' + user + '&per_page=20'
     return fetch(url)
       .then(helpers.checkStatus)
