@@ -65,8 +65,8 @@ export default class SearchView extends Component {
             renderRow={this._renderRow.bind(this)}
             // New attributes
             renderSeparator={this.renderSeparator}
-            renderFooter={this.renderFooter.bind(this)}
-            onEndReached={this.onEndReached.bind(this)}
+            // renderFooter={this.renderFooter.bind(this)}
+            // onEndReached={this.onEndReached.bind(this)}
             />
         </View>
 
@@ -91,12 +91,11 @@ export default class SearchView extends Component {
   //
 
   onSearchChange(event: Object) {
-    debugger
     var that = this
     const filter = event.nativeEvent.text.toLowerCase();
 
     clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout(() => {that._searchUsers(filter)}, 1000)
+    this.timeoutID = setTimeout(() => that._searchUsers(filter), 1000)
   }
 
   //-----------------------------------
@@ -105,6 +104,7 @@ export default class SearchView extends Component {
   //
 
   onEndReached() {
+    debugger
     var query = this.state.filter;
     if (!this.hasMore() || this.state.isLoadingTail) {
       // We're already fetching or have all the elements so noop
@@ -162,7 +162,6 @@ export default class SearchView extends Component {
 
   // TODO: Break out into private functions
   _searchUsers(query: string) {
-    var that = this
     console.log('[SearchView] search users query:' + query)
     this.timeoutID = null;
 
@@ -189,11 +188,9 @@ export default class SearchView extends Component {
       isLoadingTail: false,
     });
 
-    that = this
     githubService.searchUser(query)
-      .then((responseData) => {
-        debugger
-      // TODO
+      .then(function(responseData) {
+
       this.LOADING[query] = false;
 
       // TODO
@@ -205,6 +202,7 @@ export default class SearchView extends Component {
 
       if (this.state.filter !== query) {
         // do not update state if the query is stale
+        debugger
         return;
       }
 
@@ -212,15 +210,17 @@ export default class SearchView extends Component {
         isLoading: false,
         dataSource: this._getDataSource(responseData.items),
       });
-     })
-    .catch((error) => {
+     }.bind(this))
+    .catch(function(error) {
+      debugger
+      console.log('[SearchView] error retrieving user: ' + error)
        this.LOADING[query] = false;
        this.resultsCache.dataForQuery[query] = undefined;
        this.setState({
         dataSource: this._getDataSource([]),
          isLoading: false,
        });
-    })
+    }.bind(this))
   }
 
   _getDataSource(users: Array<any>): ListView.DataSource {

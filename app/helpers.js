@@ -5,7 +5,7 @@ const helpers = {
 
 
 function checkStatus(res) {
-  debugger
+  console.log('[Helpers] checkStatus: ' + res.status)
   // if (res.status >= 200 && res.status < 300) {
     return res;
   // }
@@ -15,7 +15,7 @@ function checkStatus(res) {
 }
 
  function parseJson(res) {
-   debugger
+  // console.log('[Helpers] parseJson: ' + res)
   return res.json();
 }
 

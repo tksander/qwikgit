@@ -23,7 +23,8 @@ export default class SearchBar extends Component {
         <TextInput
             style={styles.searchBarInput}
             // onChange={this.props.onSearchChange}
-            onButtonPress={this.props.onSearchChange}
+            onKeyPress={this._handleKeyPress}
+            onSubmitEditing={this.props.onSearchChange}
             placeholder=" Search for a user..."
             autoCapitalize="words"
             auotCorrect="false"
@@ -42,9 +43,9 @@ export default class SearchBar extends Component {
 
   _handleKeyPress(event) {
     console.log('EVENT', event)
-    if (event.nativeEvent.key === 'Enter') {
-      this._update(this.state.text)
-    }
+    // if (event.nativeEvent.key === 'Enter') {
+      // this._update(this.state.text)
+    // }
   }
 
   _update(text) {

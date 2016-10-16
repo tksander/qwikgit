@@ -9,14 +9,20 @@ const services = {
   function searchUser(user) {
     const url = 'https://api.github.com/search/users?q=' + user + '&per_page=20'
     return fetch(url)
-      .then(helpers.checkStatus)
-      .then(helpers.parseJson)
-      .then(data => data)
-      .catch(error => {
-        debugger
-        console.log('[Github Service] Error /search/users : '  + error);
-        throw error;
+      // .then(helpers.checkStatus)
+      // .then(helpers.parseJson)
+      // .then(data => data)
+      // .catch(error => {
+        // console.log('[Github Service] Error /search/users : '  + error);
+        // throw error;
+      // })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson;
       })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function getUser(user) {
