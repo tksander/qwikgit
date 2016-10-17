@@ -43,9 +43,11 @@ export default class UserCell extends Component {
 const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    // alignItems: 'center'
   },
   userLogin: {
-    flex: 1,
     fontSize: 16,
     marginBottom: 2,
     fontFamily: 'HelveticaNeue-Medium'
