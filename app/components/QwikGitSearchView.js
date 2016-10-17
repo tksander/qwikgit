@@ -6,6 +6,7 @@ import {
   Text,
   View,
   ListView,
+  Image,
 } from 'react-native';
 
 import UserCell from './UserCell.js'
@@ -81,6 +82,9 @@ export default class SearchView extends Component {
         />
         <View style={styles.separator} />
         {content}
+        <View style={styles.imageContainer}>
+          <Image source={require('../assets/GitHub-Mark-32px.png')} style={styles.githubLogo}/>
+        </View>
       </View>
     );
   }
@@ -298,5 +302,16 @@ const styles = StyleSheet.create({
   rowSeparatorHide: {
     opacity: 0.0,
   },
+  githubLogo: {
+    opacity: 0.3,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  imageContainer: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'lightgray',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 

@@ -24,12 +24,17 @@ export default class User extends Component {
     if(!(Object.keys(this.state.user).length === 0)) {
       return (
         <View>
-            <Image source={{uri: this.state.user.avatar_url}}
-                   style={{width: 40, height: 40}}/>
-            <Text>User: {this.state.user.name}</Text>
-            <Text>Email: {this.state.user.email}</Text>
-            <Text>Created: {this.state.user.created_at}</Text>
-            <Text>Location: {this.state.user.location}</Text>
+          <View>
+              <Image source={{uri: this.state.user.avatar_url}}
+                     style={{width: 120, height: 120}}/>
+              <Text>User: {this.state.user.name}</Text>
+              <Text>Email: {this.state.user.email}</Text>
+              <Text>Created: {this.state.user.created_at}</Text>
+              <Text>Location: {this.state.user.location}</Text>
+          </View>
+          <View style={styles.imageContainer}>
+            <Image source={require('../assets/GitHub-Mark-32px.png')} style={styles.githubLogo}/>
+          </View>
         </View>
       )
     }
@@ -63,4 +68,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 8,
   },
+  githublogo: {
+    opacity: 0.3,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  imagecontainer: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'lightgray',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
