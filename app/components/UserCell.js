@@ -9,31 +9,8 @@ import {
   View
 } from 'react-native';
 
-
-// export default class User extends Component {
-
-  //-----------------------------------
-  // RENDERING
-  //-----------------------------------
-  // render() {
-    // return (
-      // <View>
-       // <Text>User: {this.props.login}</Text>
-      // </View>
-    // )
-  // }
-// }
-
-
-
-
 export default class UserCell extends Component {
   render() {
-    // Pass info as this.props.whatever
-    // var criticsScore = this.props.movie.ratings.critics_score;
-
-  // Pic: avatar_url
-  // Login: login
 
   //-----------------------------------
   // RENDERING
@@ -71,6 +48,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     marginBottom: 2,
+    fontFamily: 'HelveticaNeue-Medium'
   },
   row: {
     alignItems: 'center',
@@ -80,9 +58,13 @@ const styles = StyleSheet.create({
   },
   cellImage: {
     backgroundColor: '#dddddd',
-    height: 93,
-    marginRight: 10,
+    height: 60,
     width: 60,
+    borderRadius: 30,
+    borderWidth: 0.8,
+    borderColor: '#d6d7da',
+    marginRight: 10,
+    marginLeft: 20,
   },
   cellBorder: {
     backgroundColor: 'rgba(0, 0, 0, 0.1)',

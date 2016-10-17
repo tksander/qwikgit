@@ -64,8 +64,7 @@ export default class SearchView extends Component {
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this._renderRow.bind(this)}
-            // New attributes
-            renderSeparator={this.renderSeparator}
+            renderSeparator={this._renderSeparator.bind(this)}
             renderFooter={this._renderFooter.bind(this)}
             onEndReached={this._onEndReached.bind(this)}
             />
@@ -113,6 +112,16 @@ export default class SearchView extends Component {
     return (
       this.resultsCache.totalForQuery[query] !==
       this.resultsCache.dataForQuery[query].length
+    );
+  }
+
+  _renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+    var style = styles.rowSeparator;
+    if (adjacentRowHighlighted) {
+        style = [style, styles.rowSeparatorHide];
+    }
+    return (
+      <View key={'SEP_' + sectionID + '_' + rowID}  style={style}/>
     );
   }
 
@@ -280,8 +289,14 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#eeeeee',
   },
-  default: {
-    flex: 1,
-}
+  rowSeparator: {
+    height: 1,
+    marginLeft: 4,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  rowSeparatorHide: {
+    opacity: 0.0,
+  },
 });
 
