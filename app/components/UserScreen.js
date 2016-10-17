@@ -27,10 +27,13 @@ export default class User extends Component {
           <View style={styles.userContent}>
               <Image source={{uri: this.state.user.avatar_url}}
                      style={{width: 120, height: 120}}/>
-              <Text>User: {this.state.user.name}</Text>
-              <Text>Email: {this.state.user.email}</Text>
-              <Text>Created: {this.state.user.created_at}</Text>
-              <Text>Location: {this.state.user.location}</Text>
+              <View>
+                <Text style={styles.userName}>{this.state.user.name}</Text>
+                <Text style={styles.loginName}>{this.state.user.login}</Text>
+                <Text>Email: {this.state.user.email}</Text>
+                <Text>Created: {this.state.user.created_at}</Text>
+                <Text>Location: {this.state.user.location}</Text>
+               </View>
           </View>
           <View style={styles.imageContainer}>
             <Image source={require('../assets/GitHub-Mark-32px.png')} style={styles.githubLogo}/>
@@ -55,6 +58,7 @@ export default class User extends Component {
   componentDidMount() {
     githubService.getUser(this.props.user.login)
       .then(response => {
+        debugger
         this.setState({
             user: response
         })
@@ -72,8 +76,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 8,
   },
+  userName: {
+      fontFamily: 'Helvetica-Bold',
+      fontSize: 16
+  },
   userContent: {
-      flex: 1
+      flex: 1,
+      flexDirection: 'row',
   },
   githubLogo: {
     opacity: 0.3,

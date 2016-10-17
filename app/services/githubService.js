@@ -7,7 +7,6 @@ const services = {
 }
 
   function searchUser(user, page) {
-  
     const url = 'https://api.github.com/search/users?q=' + user + '&per_page=20' + 
                   '&page=' + page
     return fetch(url)
