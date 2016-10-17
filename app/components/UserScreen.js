@@ -23,8 +23,8 @@ export default class User extends Component {
   render() {
     if(!(Object.keys(this.state.user).length === 0)) {
       return (
-        <View>
-          <View>
+        <View style={styles.container}>
+          <View style={styles.userContent}>
               <Image source={{uri: this.state.user.avatar_url}}
                      style={{width: 120, height: 120}}/>
               <Text>User: {this.state.user.name}</Text>
@@ -63,17 +63,24 @@ export default class User extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
   centering: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
   },
-  githublogo: {
+  userContent: {
+      flex: 1
+  },
+  githubLogo: {
     opacity: 0.3,
     marginBottom: 10,
     marginTop: 10,
   },
-  imagecontainer: {
+  imageContainer: {
     borderTopWidth: 0.5,
     borderTopColor: 'lightgray',
     justifyContent: 'center',
