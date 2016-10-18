@@ -5,6 +5,7 @@ import { View,
          ActivityIndicator,
          StyleSheet} from 'react-native';
 import githubService from '../services/githubService'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class User extends Component {
   constructor(props) {
@@ -33,9 +34,13 @@ export default class User extends Component {
                   <Text style={styles.loginName}>{this.state.user.login}</Text>
                 </View>
                 <View style={styles.infoContainer}>
-                  <Text>Email: {this.state.user.email}</Text>
-                  <Text>Created: {this.state.user.created_at}</Text>
-                  <Text>Location: {this.state.user.location}</Text>
+                  <View style={styles.rowInfo}>
+                    <Icon name="envelope-o" style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.email}</Text>
+                  </View>
+                  <Text style={styles.infoText}>Created: {this.state.user.created_at}</Text>
+                  <View style={styles.rowInfo}>
+                    <Icon name="globe" style={styles.infoIcon} /><Text style={styles.infoText}>Location: {this.state.user.location}</Text>
+                  </View>
                 </View>
                </View>
           </View>
@@ -81,6 +86,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 8,
   },
+  infoIcon: {
+      color: 'grey',
+      paddingHorizontal: 5
+  },
+  rowInfo: {
+      flexDirection: 'row',
+      fontFamily: 'Helvetica',
+      fontSize: 12,
+      paddingVertical: 5
+  },
+  infoText: {
+      fontFamily: 'Helvetica',
+      fontSize: 12,
+  },
   userImage: {
       width: 120,
       height: 120,
@@ -92,7 +111,7 @@ const styles = StyleSheet.create({
   },
   loginName: {
       fontFamily: 'Helvetica',
-      fontSize: 14,
+      fontSize: 12,
       color: 'grey',
   },
   namesContainer: {
@@ -101,7 +120,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingVertical: 20,
   },
   userContent: {
       flex: 1,
