@@ -6,6 +6,7 @@ import { View,
          StyleSheet} from 'react-native';
 import githubService from '../services/githubService'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import moment from 'moment'
 
 export default class User extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class User extends Component {
 
   // avatar_url, bio, email, name, created_at, location
   render() {
+    let createDate = moment(this.state.user.created_at).format('MMM Do, YYYY')
     if(!(Object.keys(this.state.user).length === 0)) {
       return (
         <View style={styles.container}>
@@ -37,9 +39,9 @@ export default class User extends Component {
                   <View style={styles.rowInfo}>
                     <Icon name="envelope-o" style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.email}</Text>
                   </View>
-                  <Text style={styles.infoText}>Created: {this.state.user.created_at}</Text>
+                  <Text style={styles.infoText}>{createDate}</Text>
                   <View style={styles.rowInfo}>
-                    <Icon name="globe" style={styles.infoIcon} /><Text style={styles.infoText}>Location: {this.state.user.location}</Text>
+                    <Icon name="globe" style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.location}</Text>
                   </View>
                 </View>
                </View>
