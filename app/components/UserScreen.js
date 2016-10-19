@@ -37,11 +37,13 @@ export default class User extends Component {
                 </View>
                 <View style={styles.infoContainer}>
                   <View style={styles.rowInfo}>
-                    <Icon name="envelope-o" style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.email}</Text>
+                    <Icon name="envelope-o" size={18} style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.email}</Text>
                   </View>
-                  <Text style={styles.infoText}>{createDate}</Text>
                   <View style={styles.rowInfo}>
-                    <Icon name="globe" style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.location}</Text>
+                    <Icon name="github" size={18} style={styles.infoIcon} /><Text style={styles.infoText}>Joined {createDate}</Text>
+                  </View>
+                  <View style={styles.rowInfo}>
+                    <Icon name="globe" size={18} style={styles.infoIcon} /><Text style={styles.infoText}>{this.state.user.location}</Text>
                   </View>
                 </View>
                </View>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingTop: 15,
   },
   centering: {
     alignItems: 'center',
@@ -94,9 +96,10 @@ const styles = StyleSheet.create({
   },
   rowInfo: {
       flexDirection: 'row',
+      alignItems: 'center',
       fontFamily: 'Helvetica',
-      fontSize: 12,
-      paddingVertical: 5
+      fontSize: 13,
+      paddingVertical: 3
   },
   infoText: {
       fontFamily: 'Helvetica',
@@ -113,16 +116,15 @@ const styles = StyleSheet.create({
   },
   loginName: {
       fontFamily: 'Helvetica',
-      fontSize: 12,
+      fontSize: 13,
       color: 'grey',
   },
   namesContainer: {
     paddingHorizontal: 15,
-    paddingVertical: 15,
   },
   infoContainer: {
     paddingHorizontal: 15,
-    paddingVertical: 20,
+    paddingTop: 10,
   },
   userContent: {
       flex: 1,

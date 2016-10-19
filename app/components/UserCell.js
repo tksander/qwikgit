@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   userLogin: {
     fontSize: 16,
     marginBottom: 2,
-    fontFamily: 'HelveticaNeue-Medium'
+    fontFamily: 'Helvetica-Bold'
   },
   row: {
     alignItems: 'center',
