@@ -42,9 +42,11 @@ export default class SearchView extends Component {
   //-----------------------------------
   // LIFECYCLE
   //-----------------------------------
+
   componentDidMount() {
     this._searchUsers('');
   }
+
   componentWillUnmount() {
       clearTimeout(this.timer)
   }
@@ -94,19 +96,31 @@ export default class SearchView extends Component {
   //-----------------------------------
   //
 
+  /**
+   * @method onSearchChange
+   * @public
+   * @see https://facebook.github.io/react-native/docs/textinput.html#onsubmitediting
+   * @param event {Object} React Native event object
+   * @returns {undefined}
+   */
   onSearchChange(event: Object) {
     var that = this
     const filter = event.nativeEvent.text.toLowerCase();
 
-    clearTimeout(this.timeoutID);
+    clearTimeout(this.timeoutID: Number);
     this.timeoutID = setTimeout(() => that._searchUsers(filter), 1000)
   }
 
   //-----------------------------------
   // PRIVATE METHODS
   //-----------------------------------
-  //
-  //
+
+
+  /**
+   * @method _hasMore
+   * @private
+   * @returns {undefined}
+   */
   _hasMore() {
     var query = this.state.filter;
     if (!this.resultsCache.dataForQuery[query]) {
@@ -119,6 +133,12 @@ export default class SearchView extends Component {
     );
   }
 
+  /**
+   * @method _renderSeparator
+   * @private
+   * @param 
+   * @returns {undefined}
+   */
   _renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     var style = styles.rowSeparator;
     if (adjacentRowHighlighted) {

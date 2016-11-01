@@ -22,7 +22,6 @@ export default class SearchBar extends Component {
       <View style={styles.searchBar}>
         <TextInput
             style={styles.searchBarInput}
-            // onChange={this.props.onSearchChange}
             onKeyPress={this._handleKeyPress}
             onSubmitEditing={this.props.onSearchChange}
             placeholder=" Search for a user..."
